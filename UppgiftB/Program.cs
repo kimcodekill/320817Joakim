@@ -14,7 +14,6 @@ namespace UppgiftB
             string sentence = Console.ReadLine();
 
             string[] words = sentence.Split(' ');
-            string[] wordsSorted = new string[words.Length];
 
             for (int i =0; i < words.Length; i++)
             {
@@ -27,13 +26,14 @@ namespace UppgiftB
                 }
                 words[j] = word;
             }
-                        
 
             foreach (string s in words)
             {
                 Console.WriteLine(s);
             }
 
+            for (int i = words.Length; i > 0; i--)
+                Console.WriteLine(words[i-1]);
         }
     }
 }
