@@ -16,15 +16,24 @@ namespace UppgiftB
             string[] words = sentence.Split(' ');
             string[] wordsSorted = new string[words.Length];
 
-            Array.Sort(words);
+            for (int i =0; i < words.Length; i++)
+            {
+                string word = words[i];
+                int j = i;
+                while (j>0 && words[j-1].Length.CompareTo(word.Length) > 0)
+                {
+                    words[i] = words[j - 1];
+                    j = j - 1;
+                }
+                words[j] = word;
+            }
+                        
 
             foreach (string s in words)
+            {
                 Console.WriteLine(s);
+            }
 
-            Array.Reverse(words);
-
-            foreach (string s in words)
-                Console.WriteLine(s);
         }
     }
 }
