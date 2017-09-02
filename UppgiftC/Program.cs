@@ -13,38 +13,50 @@ namespace UppgiftC
             Console.WriteLine("Mata in en mening.");
             string[] words = Console.ReadLine().Split(' ');
 
-            /*  Hade velat använda list här
-             *  
-             *  List<string> newWords = new List<string>();
-             *  
-             *  foreach (string s in words)
-             *      if (!newWords.Contains(s)
-             *          newWords.Add(s);
-             *  
-             *  int[] wordCount = new int[newWords.Count]
-             *  foreach (string s in newWords)
-             *  {
-             *      int count = 0;
-             *      foreach (string d in words)
-             *          if (s = d)
-             *              count++;
-             *      wordCount[newWords.IndexOf(s)] = count;
-             *  }
-             *  
-             */
-            string newWordsString = string.Empty;
-            foreach (string s in words)
+            //  Hade velat använda list här
+               
+               List<string> newWords = new List<string>();
+               
+               foreach (string s in words)
+                   if (!newWords.Contains(s))
+                       newWords.Add(s);
+
+            int[] wordCount = new int[newWords.Count];
+               foreach (string s in newWords)
+               {
+                   int count = 0;
+                   foreach (string d in words)
+                       if (s == d)
+                           count++;
+
+                   wordCount[newWords.IndexOf(s)] = count;
+               }
+
+            for (int i = 0; i < newWords.Count; i++)
             {
-                if (!newWordsString.Contains(s))
+                string word = newWords.ElementAt(i);
+                int j = i;
+                while (j > 0 && wordCount[j - 1].CompareTo(wordCount[i]) > 0)
                 {
-                    newWordsString += s + '.';
+                    newWords[i] = newWords[j - 1];
+                    j = j - 1;
                 }
+                newWords[j] = word;
             }
 
-            string[] newWords = newWordsString.Split('.');
+            //string newWordsString = string.Empty;
+            //foreach (string s in words)
+            //{
+            //    if (!newWordsString.Contains(s))
+            //    {
+            //        newWordsString += s + '.';
+            //    }
+            //}
 
-            //foreach (string s in newWords)
-            //    Console.WriteLine(s + " (" + wordCount[newWords.IndexOf(s)] + ')');
+            //string[] newWords = newWordsString.Split('.');
+
+            foreach (string s in newWords)
+                Console.WriteLine(s + " (" + wordCount[newWords.IndexOf(s)] + ')');
         }
     }
 }
